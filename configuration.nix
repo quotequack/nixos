@@ -7,7 +7,6 @@
       ./modules/nixos/nvidia.nix
       inputs.home-manager.nixosModules.default
       inputs.nix-minecraft.nixosModules.minecraft-servers
-      inputs.nvf.nixosModules.default
     ];
   nixpkgs.overlays =
     [
@@ -41,7 +40,7 @@
   };};
 
  # OPENGL
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       vulkan-loader
@@ -91,7 +90,7 @@
   services.xserver.windowManager.i3.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us_thorn";
 
     extraLayouts.us_thorn = {
@@ -313,11 +312,6 @@
 
   # Automounting
   services.udisks2.enable = true;
-
-  # picom
-  services.picom = {
-    enable = true;
-  };
 
   # FONTS
   fonts.packages = with pkgs; [

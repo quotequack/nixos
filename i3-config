@@ -75,6 +75,7 @@ bindsym $mod+Shift+e exec rofi -show filebrowser
 bindsym $mod+g exec tdrop -am -w 60% -y 30% -x 20% -n 0 kitty
 bindsym $mod+Shift+g exec --no-startup-id tdrop -am -x 74% -y 25 -w 25% -h 25% kitty fum
 bindsym $mod+Shift+d exec bash /home/quote/.config/rofi/rofi-powermenu.sh
+bindsym $mod+t exec rofimoji
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 
@@ -149,6 +150,9 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# Floating Window
+for_window [class="clickexla"] floating enable
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -163,7 +167,6 @@ bindsym $mod+0 workspace number $ws10
 
 # Bar 
 bar {
-  status_command i3blocks
   position top
   colors{
     background #2e3440

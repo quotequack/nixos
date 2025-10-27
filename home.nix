@@ -1,9 +1,13 @@
 { lib, config, pkgs, inputs, system,  ... }:
+
 {
+
+  # Imports
   imports = [
     inputs.zen-browser.homeModules.beta
   ];
 
+  # Settings
   home.username = "quote";
   home.homeDirectory = "/home/quote";
 
@@ -19,8 +23,6 @@
   # Starship config
   programs.starship = {
     enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = true;
   };
 
   
@@ -167,6 +169,7 @@
     };
   };
 
+  # Installs
   home.packages = [
     pkgs.librewolf
     pkgs.ardour
@@ -220,7 +223,7 @@
     pkgs.scrcpy
     pkgs.gnome-boxes
     pkgs.mullvad-vpn
-# Arduino
+    # Arduino
     pkgs.arduino
     pkgs.arduino-ide
     pkgs.bluez-experimental
@@ -261,8 +264,33 @@
     pkgs.obs-studio
     pkgs.vlc
     pkgs.blender
+    pkgs.rofimoji
   ];
 
+  # Vesktop
+  programs.vesktop.settings = {
+    discordBranch= "canary";
+    tray= true;
+    openLinksWithElectron= false;
+    enableSplashScreen= false;
+    staticTitle= true;
+  };
+
+  # Mime apps
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "zen-beta.desktop";
+      "x-scheme-handler/http" = "zen-beta.desktop";
+      "x-scheme-handler/https" = "zen-beta.desktop";
+      "x-scheme-handler/about" = "zen-beta.desktop";
+      "x-scheme-handler/unknown" = "zen-beta.desktop";
+      "inode/directory" = "thunar.desktop";
+      "text/plain" = "code.desktop";
+    };
+  };
+
+  # File configs
   home.file = {
     ".config/i3/config" = {
       source = ./i3-config;
@@ -280,18 +308,35 @@
         PrefersNonDefaultGPU=true
         X-KDE-RunOnDiscreteGpu=true
       '';
-    ".config/starship.toml".text = { source = ./starship; };
+    ".config/starship.toml" = { source = ./starship; };
+    ".config/fish/config.fish".text = ''
+      if status is-interactive
+        starship init fish | source
+      end
+      set -gx PATH /usr/bin/ $PATH
+      zoxide init fish | source
+      function fish_greeting
+        set_color green
+        random choice "Eth ez tum" "wilcom" "HAII" "jst kys"
+        set_color white
+      end
+      set -g fish_key_bindings fish_vi_key_bindings
+    '';
   };
   
-
+  # Gtk
   gtk = {
     enable = true;
   };
+
+  # Variables
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
 
+  # Allow unfree
   nixpkgs.config.allowUnfree = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
