@@ -1,18 +1,15 @@
 { config, pkgs, inputs, system,  ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [
       ./hardware-configuration.nix
       ./modules/nixos/nvidia.nix
       inputs.home-manager.nixosModules.default
       inputs.nix-minecraft.nixosModules.minecraft-servers
-    ];
-  nixpkgs.overlays =
-    [
+  ];
+  nixpkgs.overlays = [
     inputs.nix-minecraft.overlay
-    ];
-
+  ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -26,10 +23,6 @@
   networking.hostName = "quote"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Bluea tootha stuff
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -39,7 +32,7 @@
     Enable = "Source,Sink,Media,Socket";
   };};
 
- # OPENGL
+  # OPENGL
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -64,7 +57,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "el_GR.UTF-8";
     LC_IDENTIFICATION = "el_GR.UTF-8";
@@ -128,9 +120,6 @@
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   xdg.portal.config.common.default = "*";
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.groups.audio = {};
   users.users.quote = {
@@ -161,49 +150,51 @@
   };
 
   # stylix
-  stylix.enable=true;
-  stylix.polarity="dark";
-  stylix.base16Scheme={
-    base00= "2E3440";
-    base01= "3B4252";
-    base02= "434C5E";
-    base03= "4C566A";
-    base04= "D8DEE9";
-    base05= "E5E9F0";
-    base06= "ECEFF4";
-    base07= "8FBCBB";
-    base08= "BF616A";
-    base09= "D08770";
-    base0A= "EBCB8B";
-    base0B= "A3BE8C";
-    base0C= "88C0D0";
-    base0D= "81A1C1";
-    base0E= "B48EAD";
-    base0F= "5E81AC";
+  stylix = {
+    enable=true;
+    polarity="dark";
+    base16Scheme={
+      base00= "2E3440";
+      base01= "3B4252";
+      base02= "434C5E";
+      base03= "4C566A";
+      base04= "D8DEE9";
+      base05= "E5E9F0";
+      base06= "ECEFF4";
+      base07= "8FBCBB";
+      base08= "BF616A";
+      base09= "D08770";
+      base0A= "EBCB8B";
+      base0B= "A3BE8C";
+      base0C= "88C0D0";
+      base0D= "81A1C1";
+      base0E= "B48EAD";
+      base0F= "5E81AC";
+    };
+    image=./3xsraffkwi1a1.png;
+    cursor.package = pkgs.bibata-cursors;
+    cursor.name = "Bibata-Modern-Ice";
+    cursor.size = 24;
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.blex-mono;
+        name = "BlexMono Nerd Font";
+      };
+      sansSerif = {
+        package = pkgs.nerd-fonts.blex-mono;
+        name = "BlexMono Nerd Font";
+      };
+      serif = {
+        package = pkgs.nerd-fonts.blex-mono;
+        name = "BlexMono Nerd Font";
+      };
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
+    autoEnable = true;
   };
-  stylix.image=./3xsraffkwi1a1.png;
-  stylix.cursor.package = pkgs.bibata-cursors;
-  stylix.cursor.name = "Bibata-Modern-Ice";
-  stylix.cursor.size = 24;
-  stylix.fonts = {
-    monospace = {
-      package = pkgs.nerd-fonts.blex-mono;
-      name = "BlexMono Nerd Font";
-    };
-    sansSerif = {
-      package = pkgs.nerd-fonts.blex-mono;
-      name = "BlexMono Nerd Font";
-    };
-    serif = {
-      package = pkgs.nerd-fonts.blex-mono;
-      name = "BlexMono Nerd Font";
-    };
-    emoji = {
-      package = pkgs.noto-fonts-emoji;
-      name = "Noto Color Emoji";
-    };
-  };
-  stylix.autoEnable = true;
 
   # Enable steam
   programs.steam.enable = true;
@@ -223,8 +214,7 @@
     '';
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # Packages
   environment.systemPackages = with pkgs; [
 
     bluez-tools
@@ -323,10 +313,13 @@
     nerd-fonts.blex-mono
   ];
 
+  # Key
+  services.gnome.gnome-keyring.enable = true;
+  programs.seahorse.enable = true;
+  services.dbus.packages = [ pkgs.gnome-keyring pkgs.gcr ];
+
   # Gaming settings
   services.xserver.videoDrivers = ["nvidia"];
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
@@ -334,15 +327,6 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
   networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 
   # FLAKES
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
