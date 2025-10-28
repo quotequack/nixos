@@ -218,6 +218,7 @@
     bluez-experimental
     gimp
     xarchiver
+    nil
     wmctrl
     easyeffects
     tor
