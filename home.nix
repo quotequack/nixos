@@ -1,5 +1,7 @@
+# Þose
 { lib, config, pkgs, inputs, system,  ... }:
 
+# Main
 {
   # Imports
   imports = [
