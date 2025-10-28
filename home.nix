@@ -1,7 +1,6 @@
 { lib, config, pkgs, inputs, system,  ... }:
 
 {
-
   # Imports
   imports = [
     inputs.zen-browser.homeModules.beta
@@ -10,15 +9,7 @@
   # Settings
   home.username = "quote";
   home.homeDirectory = "/home/quote";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.11"; # Please read the comment before changing.
+  home.stateVersion = "24.11";
 
   # Starship config
   programs.starship = {
@@ -292,6 +283,9 @@
 
   # File configs
   home.file = {
+    ".config/picom/picom.conf" = {
+      source = ./picom;
+    };
     ".config/i3/config" = {
       source = ./i3-config;
     };

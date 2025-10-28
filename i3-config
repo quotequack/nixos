@@ -73,7 +73,7 @@ bindsym $mod+e exec thunar
 bindsym $mod+i exec thunar /home/quote/memes/
 bindsym $mod+Shift+e exec rofi -show filebrowser
 bindsym $mod+g exec tdrop -am -w 60% -y 30% -x 20% -n 0 kitty
-bindsym $mod+Shift+g exec --no-startup-id tdrop -am -x 74% -y 25 -w 25% -h 25% kitty fum
+bindsym $mod+Shift+g exec --no-startup-id tdrop -am -x 1601 -y 50 -w 300 -h 380 kitty fum
 bindsym $mod+Shift+d exec bash /home/quote/.config/rofi/rofi-powermenu.sh
 bindsym $mod+t exec rofimoji
 # A more modern dmenu replacement is rofi:
@@ -236,5 +236,5 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #d8dee9
 
 exec_always feh --bg-scale --randomize ~/Pictures/wallpapers/* &
-exec_always picom --corner-radius 10 -f -D 5
+exec_always picom -f -D 5
 
