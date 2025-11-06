@@ -59,7 +59,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec ghostty
 bindsym $mod+Shift+Return rofi -show recursivebrowser
 
 # kill focused window
@@ -72,8 +72,8 @@ bindsym $mod+Shift+a exec rofi -show run
 bindsym $mod+e exec thunar
 bindsym $mod+i exec thunar /home/quote/memes/
 bindsym $mod+Shift+e exec rofi -show filebrowser
-bindsym $mod+g exec tdrop -am -w 60% -y 30% -x 20% -n 0 kitty
-bindsym $mod+Shift+g exec --no-startup-id tdrop -am -x 1601 -y 50 -w 300 -h 380 kitty fum
+bindsym $mod+g exec tdrop -am -w 60% -y 30% -x 20% -n 0 ghostty
+bindsym $mod+Shift+g exec --no-startup-id tdrop -am -x 1601 -y 50 -w 300 -h 380 ghostty fum
 bindsym $mod+Shift+d exec bash /home/quote/.config/rofi/rofi-powermenu.sh
 bindsym $mod+t exec rofimoji
 # A more modern dmenu replacement is rofi:
@@ -152,6 +152,7 @@ set $ws10 "10"
 
 # Floating Window
 for_window [class="clickexla"] floating enable
+for_window [class="ghostty"] floating enable
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1

@@ -30,6 +30,10 @@
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.tabs.allow_transparent_browser" = true;
         "zen.widget.linux.transparency" = true;
+        "zen.theme.accent-color" = "#8fbcbb";
+        "zen.theme.essentials-favicon-bg" = true;
+        "zen.theme.gradient.show-custom-colors" = true;
+        "zen.view.experimental-rounded-view" = true;
       };
       userChrome = ''
     :root {
@@ -185,6 +189,7 @@
     python3Packages.xlib
     mangohud
     kitty
+    ghostty
     fastfetch
     fzf
     cura-appimage
@@ -218,6 +223,7 @@
     bluez-experimental
     gimp
     xarchiver
+    wireshark
     nil
     wmctrl
     easyeffects
@@ -315,6 +321,7 @@
       end
       set -g fish_key_bindings fish_vi_key_bindings
     '';
+    ".config/ghostty/config"= { source = ./ghostty.config; };
   };
   
   # Gtk

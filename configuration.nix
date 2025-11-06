@@ -83,7 +83,7 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us_thorn";
+    layout = "us(colemak)";
 
     extraLayouts.us_thorn = {
       description = "us layout with þorn";
@@ -126,7 +126,7 @@
     isNormalUser = true;
     description = "quote";
     shell = pkgs.fish;
-    extraGroups = [ "audio" "input" "libvirtd" "networkmanager" "wheel" "dialout" ];
+    extraGroups = [ "audio" "input" "libvirtd" "networkmanager" "wheel" "dialout" "wireshark" ];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
@@ -245,9 +245,9 @@
     xorg.libXi 
     cudatoolkit
     xorg.libXtst
-    pkgs.xorg.libX11
-    pkgs.xorg.libXtst
-    pkgs.xorg.libXrandr
+    xorg.libX11
+    xorg.libXtst
+    xorg.libXrandr
     xorg.libXtst
 
     ckb-next
@@ -265,29 +265,29 @@
     grc
     rustup
     git
-    pkgs.feh
-    pkgs.picom
-    pkgs.dunst
+    feh
+    picom
+    dunst
 
     mesa
 
     docker
 
-    pkgs.python3
-    pkgs.pipx
-    pkgs.python312Packages.pip
-    pkgs.cloudflare-warp
-    pkgs.helvum
-    pkgs.pavucontrol
-    pkgs.gcc
-    pkgs.gnumake
-    pkgs.i3blocks
-    pkgs.binutils
-    pkgs.home-manager
+    python3
+    pipx
+    python312Packages.pip
+    cloudflare-warp
+    helvum
+    pavucontrol
+    gcc
+    gnumake
+    i3blocks
+    binutils
+    home-manager
     neovim
-    pkgs.nixd
-    pkgs.bibata-cursors
-    pkgs.pkg-config
+    nixd
+    bibata-cursors
+    pkg-config
   ];
 
   services.cloudflare-warp.enable = true;
