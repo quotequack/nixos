@@ -238,4 +238,4 @@ client.background       #d8dee9
 
 exec_always feh --bg-scale --randomize ~/Pictures/wallpapers/* &
 exec_always picom -f -D 5
-
+exec_always udiskie -ta

@@ -168,7 +168,7 @@
 
   # Installs
   home.packages = with pkgs; [
-    librewolf
+    barrier
     ardour
     networkmanagerapplet
     icu
